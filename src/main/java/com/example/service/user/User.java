@@ -1,4 +1,4 @@
-package com.example.service;
+package com.example.service.user;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.List;
 
 @Entity
 public class User {
@@ -18,17 +20,13 @@ public class User {
     private final byte[] password;
     private final String email;
 
+    private List<Category> categories;
+
     public User(String username, String email, String password) throws NoSuchAlgorithmException {
         this.username = username;
         this.password = getPasswordHash(password);
         this.email = email;
         System.out.println("NEW USER CREATED: " + this.toString());
-    }
-
-    public User() {
-        this.username = "";
-        this.email = "";
-        this.password = null;
     }
 
     public long getId () {
@@ -47,6 +45,16 @@ public class User {
         return this.password;
     }
 
+    public List<Category> getCategories () {
+        return this.categories;
+    }
+
+    public void addCategory (String name) {
+
+        Category cat = new Category(name);
+        categories.add(cat);
+    }
+
     private byte[] getPasswordHash (String pass) throws NoSuchAlgorithmException {
 
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -55,6 +63,10 @@ public class User {
 
     @Override
     public String toString () {
-        return "User {username = " + this.username + ", id: " + this.id + ", email: " + this.email + "}";
+        return "User {username = "
+                + this.username + ", id: "
+                + this.id + ", email: "
+                + this.email + ", password: "
+                + Arrays.toString(this.password) + "}";
     }
 }
