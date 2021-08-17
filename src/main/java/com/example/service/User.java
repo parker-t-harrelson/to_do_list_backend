@@ -18,10 +18,11 @@ public class User {
     private final byte[] password;
     private final String email;
 
-    public User(String username, String password, String email) throws NoSuchAlgorithmException {
+    public User(String username, String email, String password) throws NoSuchAlgorithmException {
         this.username = username;
         this.password = getPasswordHash(password);
         this.email = email;
+        System.out.println("NEW USER CREATED: " + this.toString());
     }
 
     public User() {
@@ -50,5 +51,10 @@ public class User {
 
         MessageDigest digest = MessageDigest.getInstance("SHA-256");
         return digest.digest(pass.getBytes(StandardCharsets.UTF_8));
+    }
+
+    @Override
+    public String toString () {
+        return "User {username = " + this.username + ", id: " + this.id + ", email: " + this.email + "}";
     }
 }
