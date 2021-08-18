@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class User {
     private final byte[] password;
     private final String email;
 
-    private List<Category> categories;
+    private ArrayList<Category> categories;
 
     public User(String username, String email, String password) throws NoSuchAlgorithmException {
         this.username = username;
@@ -45,7 +46,7 @@ public class User {
         return this.password;
     }
 
-    public List<Category> getCategories () {
+    public ArrayList<Category> getCategories () {
         return this.categories;
     }
 
