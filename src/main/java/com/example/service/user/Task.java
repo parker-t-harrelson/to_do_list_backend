@@ -11,21 +11,26 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private String taskDesc;
+    private String title;
     boolean completed;
 
     public Task (String taskDesc) {
 
-        this.taskDesc = taskDesc;
+        this.title = taskDesc;
+        this.completed = false;
+    }
+
+    public Task() {
+        this.title = "";
         this.completed = false;
     }
 
     public void setTaskDesc (String task) {
-        this.taskDesc = task;
+        this.title = task;
     }
 
     public String getTaskDesc () {
-        return this.taskDesc;
+        return this.title;
     }
 
     public boolean getCompleted () {
@@ -34,5 +39,10 @@ public class Task {
 
     public void setCompleted () {
         this.completed = !completed;
+    }
+
+    @Override
+    public String toString () {
+        return "Task Desc: {" + this.title + ", Completed: " + this.completed + "}";
     }
 }

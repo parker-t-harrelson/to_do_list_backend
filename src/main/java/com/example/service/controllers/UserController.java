@@ -1,6 +1,8 @@
 package com.example.service.controllers;
 
+import com.example.service.repositories.TaskRepository;
 import com.example.service.repositories.UserRepository;
+import com.example.service.user.Task;
 import com.example.service.user.User;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,14 +13,22 @@ import java.util.List;
 public class UserController {
 
     private final UserRepository userRepository;
+    private final TaskRepository taskRepository;
 
-    public UserController (UserRepository userRepository) {
+    public UserController (UserRepository userRepository,
+                           TaskRepository taskRepository) {
         this.userRepository = userRepository;
+        this.taskRepository = taskRepository;
     }
 
     @GetMapping("/users")
     public List<User> getUsers () {
         return (List<User>) userRepository.findAll();
+    }
+
+    @GetMapping("/tasks")
+    public List<Task> getTasks () {
+        return (List<Task>) taskRepository.findAll();
     }
 
     @PostMapping("/users")
